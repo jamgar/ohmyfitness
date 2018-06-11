@@ -4,6 +4,11 @@ import { connect } from 'react-redux'
 import { startLogout } from '../actions/auth'
 
 export class Header extends React.Component {
+  renderLinks = () => {
+    if (this.props.authenticated) {
+      
+    }
+  }
   render() {
     return (
       <header className="header">
@@ -12,6 +17,7 @@ export class Header extends React.Component {
             <Link className="header__title" to="/dashboard">
               <h1>Oh My Fitness</h1>
             </Link>
+            <Link className="button button--link" to="/signup">Sign Up</Link>
             <button className="button button--link" onClick={startLogout}>Logout</button>
           </div>
         </div>
