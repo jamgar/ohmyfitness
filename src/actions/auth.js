@@ -1,8 +1,15 @@
-import { firebase, googleAuthProvider } from '../firebase/firebase'
+import axios from 'axios'
+import { history } from '../routers/AppRouter'
+import {
+  AUTH_USER,
+  UNAUTH_USER,
+  AUTH_ERROR
+} from '../constants'
 
-export const login = (uid) => ({
-  type: 'LOGIN',
-  uid
+const ROOT_URL = 'http://localhost:3000'
+
+export const login = () => ({
+  type: AUTH_USER
 })
 
 export const startLogin = () => {
@@ -12,7 +19,7 @@ export const startLogin = () => {
 }
 
 export const logout = () => ({
-  type: 'LOGOUT'
+  type: UNAUTH_USER
 })
 
 export const startLogout = () => {
