@@ -18,6 +18,10 @@ export const startLogin = () => {
   }
 }
 
+export const startSignup = (email, password) => {
+
+}
+
 export const logout = () => ({
   type: UNAUTH_USER
 })
