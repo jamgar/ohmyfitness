@@ -18,8 +18,16 @@ export const startLogin = () => {
   }
 }
 
-export const startSignup = (email, password) => {
-
+export const startSignup = ({ name, email, password, passwordConfirmation }) => {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/signup`, { name, email, password, passwordConfirmation })
+      .then(response => {
+        console.log(response);
+        dispatch(login())
+        localStorage.setItem('auth_token', response.data.auth_token)
+        history.push('/dashboard')
+      })
+  }
 }
 
 export const logout = () => ({

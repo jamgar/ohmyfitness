@@ -15,25 +15,25 @@ const jsx = (
     <AppRouter />
   </Provider>
 )
-let hasRendered = false
-const renderApp = () => {
-  if (!hasRendered) {
+// let hasRendered = true
+// const renderApp = () => {
+//   if (!hasRendered) {
     ReactDOM.render(jsx, document.getElementById('app'))
-    hasRendered = true
-  }
-}
+//     hasRendered = true
+//   }
+// }
 
-ReactDOM.render(<LoadingPage />, document.getElementById('app'))
+// ReactDOM.render(<LoadingPage />, document.getElementById('app'))
 
-const auth_token = localStorage.getItem('auth_token')
-if (auth_token) {
-  store.dispatch(login())
-  renderApp()
-  if (history.location.pathname === '/') {
-    history.push('/dashboard')
-  } else {
-    store.dispatch(logout())
-    renderApp()
-    history.push('/')
-  }
-}
+// const auth_token = localStorage.getItem('auth_token')
+// if (auth_token) {
+//   store.dispatch(login())
+//   renderApp()
+//   if (history.location.pathname === '/') {
+//     history.push('/dashboard')
+//   } else {
+//     store.dispatch(logout())
+//     renderApp()
+//     history.push('/')
+//   }
+// }
