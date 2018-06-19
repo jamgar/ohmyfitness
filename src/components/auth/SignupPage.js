@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { startSignup } from '../../actions/auth'
+import { startSignup, authError } from '../../actions/auth'
 
 export class SignupPage extends React.Component {
   constructor(props) {
@@ -13,6 +13,7 @@ export class SignupPage extends React.Component {
       passwordConfirmation: '',
       error: ''
     }
+    this.props.clearAuthErrors()
   }
   isInvalid = () => {
     let errors = ''
@@ -50,6 +51,12 @@ export class SignupPage extends React.Component {
     const passwordConfirmation = e.target.value
     this.setState({ passwordConfirmation })
   }
+  renderAlert = () => {
+    let errors
+    errors = this.props.errorMessage ? this.props.errorMessage : ''
+    errors += this.state.error ? this.state.error : ''
+    return errors
+  }
   onSubmit = (e) => {
     e.preventDefault()
     if (!this.isInvalid()) {
@@ -74,7 +81,7 @@ export class SignupPage extends React.Component {
         </div>
         <div className="content-container content-container--sm">
           <form className="form" onSubmit={this.onSubmit}>
-            {error && <p className="form__error">{error}</p>}
+            {this.renderAlert() && <p className="form__error">{this.renderAlert()}</p>}
             <input
               type="text"
               className="text-input"
@@ -107,18 +114,23 @@ export class SignupPage extends React.Component {
             <button type="submit" className="button">
               Sign Up
             </button>
-            <Link className="link" to='/'>
-              Cancel
-            </Link>
           </form>
+          <Link className="link" to='/'>
+          Cancel
+          </Link>
         </div>
       </div>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  startSignup: (formProps) => dispatch(startSignup(formProps))
+const mapStateToProps = (state) => ({
+  errorMessage: state.auth.error
 })
 
-export default connect(undefined, mapDispatchToProps)(SignupPage)
+const mapDispatchToProps = (dispatch) => ({
+  startSignup: (formProps) => dispatch(startSignup(formProps)),
+  clearAuthErrors: () => dispatch(authError(""))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupPage)

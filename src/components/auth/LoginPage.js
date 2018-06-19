@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { startLogin } from '../../actions/auth'
+import { startLogin, authError } from '../../actions/auth'
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class LoginPage extends React.Component {
       password: '',
       error: ''
     }
+    this.props.clearAuthErrors()
   }
   isInvalid = () => {
     let errors = ''
@@ -95,7 +96,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  startLogin: (formProps) => dispatch(startLogin(formProps))
+  startLogin: (formProps) => dispatch(startLogin(formProps)),
+  clearAuthErrors: () => dispatch(authError(""))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
