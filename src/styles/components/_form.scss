@@ -6,6 +6,9 @@
   }
 }
 .form__error {
+  background-color: #ff91b5;
+  color: white;
+  padding: $s-size;
   margin: 0 0 $m-size 0;
   font-style: italic;
 }

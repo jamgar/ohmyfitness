@@ -6,7 +6,7 @@ export default (state = {}, action) => {
       return { ...state, error: '', authenticated: true }
       break;
     case UNAUTH_USER:
-      return { ...state, authenticated: false}
+      return { ...state, error: '', authenticated: false}
       break;
     case AUTH_ERROR:
       return { ...state, error: action.payload }

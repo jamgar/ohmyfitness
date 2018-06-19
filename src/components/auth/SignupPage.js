@@ -15,22 +15,22 @@ export class SignupPage extends React.Component {
     }
   }
   isInvalid = () => {
-    let errorMessage = ''
+    let errors = ''
     if (this.state.name === '') {
-      errorMessage = "Name cannot be blank. "
+      errors = "Name cannot be blank. "
     }
     if (this.state.email === '') {
-      errorMessage += "Email cannot be blank. "
+      errors += "Email cannot be blank. "
     }
     if (this.state.password === '') {
-      errorMessage += "Password cannot be blank. "
+      errors += "Password cannot be blank. "
     }
     if (this.state.password !== this.state.passwordConfirmation) {
-      errorMessage += "Passwords do not match."
+      errors += "Passwords do not match."
     }
 
-    if (errorMessage) {
-      this.setState({ error: errorMessage })
+    if (errors) {
+      this.setState({ error: errors })
       return true
     }
   }

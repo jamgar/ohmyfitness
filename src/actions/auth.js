@@ -12,9 +12,17 @@ export const login = () => ({
   type: AUTH_USER
 })
 
-export const startLogin = () => {
-  return () => {
-    return firebase.auth().signInWithPopup(googleAuthProvider);
+export const startLogin = ({ email, password }) => {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/auth/login`, { email, password })
+      .then(response => {
+        dispatch(login())
+        localStorage.setItem('auth_token', response.data.auth_token)
+        history.push('/dashboard')
+      })
+      .catch(response => {
+        dispatch(authError('Invalid email or password. Please try again.'))
+      })
   }
 }
 
@@ -27,6 +35,9 @@ export const startSignup = ({ name, email, password, passwordConfirmation }) => 
         localStorage.setItem('auth_token', response.data.auth_token)
         history.push('/dashboard')
       })
+      .catch(response => {
+        dispatch(authError('Email is in use.'))
+      })
   }
 }
 
@@ -35,7 +46,15 @@ export const logout = () => ({
 })
 
 export const startLogout = () => {
-  return () => {
-    return firebase.auth().signOut()
+  return (dispatch) => {
+    localStorage.removeItem('auth_token')
+    dispatch(logout())
+  }
+}
+
+export const authError = (error) => {
+  return {
+    type: AUTH_ERROR,
+    payload: error
   }
 }
