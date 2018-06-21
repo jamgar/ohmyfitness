@@ -9,6 +9,8 @@ import Home from '../components/Home'
 // Auth
 import SignupPage from '../components/auth/SignupPage'
 import LoginPage from '../components/auth/LoginPage'
+// Workout
+import AddWorkoutPage from '../components/Workout/AddWorkoutPage.js'
 
 const AppRouter = () => (
   <div>
@@ -17,6 +19,8 @@ const AppRouter = () => (
       <PublicRoute path="/login" component={LoginPage}/>
       <PublicRoute path="/signup" component={SignupPage}/>
       <PrivateRoute path="/dashboard" component={DashboardPage}/>
+
+      <PrivateRoute path="/create-workout" component={AddWorkoutPage}/>
       <Route component={NotFoundPage}/>
     </Switch>
   </div>
