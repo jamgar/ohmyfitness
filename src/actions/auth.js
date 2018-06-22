@@ -1,12 +1,11 @@
 import axios from 'axios'
 import { history } from '../routers/AppRouter'
 import {
+  ROOT_URL,
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR
 } from '../constants'
-
-const ROOT_URL = 'http://localhost:3000'
 
 export const login = () => ({
   type: AUTH_USER

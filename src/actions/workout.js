@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { history } from '../routers/AppRouter'
 import {
+  ROOT_URL,
   ADD_WORKOUT,
 } from '../constants'
 
@@ -11,8 +12,9 @@ export const addWorkout = (workout) => ({
 })
 
 export const startAddWorkout = (workout) => {
+  console.log('Workout', workout);
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/workouts`, workout, {
+    axios.post(`${ROOT_URL}/workouts`, {workout}, {
       headers: {
         Authorization: localStorage.getItem('auth_token'),
         Accept: 'application/vnd.workouts.v1+json'

@@ -29,6 +29,15 @@
 .button--danger:hover {
   background-color: darken(#fd5a5a, 8%);
 }
+.button--info {
+  background-color: $bright-blue;
+}
+.button--info:hover {
+  background-color: darken($bright-blue, 8%);
+}
 .button--margin-right {
   margin-right: $s-size;
+}
+.button--margin-bottom {
+  margin-bottom: $s-size;
 }
