@@ -11,8 +11,7 @@ export const addWorkout = (workout) => ({
   workout
 })
 
-export const startAddWorkout = (workout) => {
-  console.log('Workout', workout);
+export const startAddWorkout = (workout = {}) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/workouts`, {workout}, {
       headers: {
@@ -21,10 +20,31 @@ export const startAddWorkout = (workout) => {
       }
     })
     .then(response => {
-      console.log(response);
+      console.log(response.data);
+      dispatch(addWorkout({...response.data}))
     })
     .catch(response => {
       console.log('Error', response);
+    })
+  }
+}
+
+// GET WORKOUTS
+export const getWorkouts = (workouts) => ({
+  type: 'GET_WORKOUTS',
+  workouts
+})
+
+export const startGetWorkouts = () => {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/workouts`, {
+      headers: {
+        Authorization: localStorage.getItem('auth_token'),
+        Accept: 'application/vnd.workouts.v1+json'
+      }
+    })
+    .then(response => {
+      dispatch(getWorkouts(response.data))
     })
   }
 }
